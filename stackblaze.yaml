@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: anythingllm
+    runtime: docker
+    plan: starter
+    autoDeploy: false
+    envVars:
+      - key: STORAGE_DIR
+        value: /app/server/storage
+      - key: JWT_SECRET
+        generateValue: true
