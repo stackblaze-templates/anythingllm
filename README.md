@@ -98,3 +98,26 @@ This template is actively maintained by StackBlaze. We perform **weekly automate
 - **Best practices** — configurations follow current recommendations from upstream projects
 
 Found an issue? [Open a ticket](https://github.com/stackblaze-templates/anythingllm/issues).
+
+---
+
+## Security
+
+### Required environment variables for production
+
+Before deploying to production, ensure the following environment variables are set to strong, unique values:
+
+| Variable | Description | Default |
+|---|---|---|
+| `JWT_SECRET` | Secret key used to sign authentication tokens | **None — must be set** |
+| `STORAGE_DIR` | Path where uploaded documents and vector data are stored | `/app/server/storage` |
+
+> **Warning**: `JWT_SECRET` must be set to a long, randomly-generated string (32+ characters). Leaving it unset or using a weak value allows attackers to forge authentication tokens.
+
+### First-run setup
+
+AnythingLLM forces an initial setup wizard on first run. No default admin credentials are shipped — the operator must create the admin account during setup.
+
+### Network exposure
+
+By default, AnythingLLM listens on port **3001**. In production, this port should not be exposed directly to the internet; place it behind a reverse proxy that terminates TLS.
